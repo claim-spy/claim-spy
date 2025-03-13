@@ -48,11 +48,11 @@
             text.style.color = getRandomColor();
             text.style.left = `${Math.random() * (window.innerWidth - text.clientWidth)}px`;
             text.style.top = `${Math.random() * (window.innerHeight - text.clientHeight)}px`;
-            text.style.fontSize = `${Math.random() * 100}px`;
+            text.style.fontSize = `${Math.random() * 200}px`;
         }
         
-        setInterval(updateBackground, Math.random()*300);
-        setInterval(updateTextProperties, Math.random()*700);
+        setInterval(updateBackground, Math.random()*400);
+        setInterval(updateTextProperties, Math.random()*800);
         updateBackground();
         updateTextProperties();
     </script>
