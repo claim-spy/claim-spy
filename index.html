@@ -27,7 +27,11 @@
 <body>
     <div class="text" id="scrollingText">J'aime les hommes</div>
     <script>
-        const words = ["hommes", "femmes", "gay", "animaux", "fleurs"];
+        const words = [
+            "brunettes", "blondes", "roux", "milfs", "cougars", "twinks", "bears", "dominants", "soumis", "fétiches", 
+            "voyeurs", "exhibitionnistes", "cosplay", "latex", "bikinis", "massages", "huiles", "uniformes", "roleplay", "sensuels",
+            "tentations", "caresses", "passionnés", "séducteurs", "kinky", "charmeurs", "intenses", "romantiques", "expérimentés", "aventuriers"
+        ];
         
         function getRandomColor() {
             return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
@@ -47,8 +51,8 @@
             text.style.fontSize = `${Math.random() * 100}px`;
         }
         
-        setInterval(updateBackground, Math.random()*500);
-        setInterval(updateTextProperties, Math.random()*300);
+        setInterval(updateBackground, Math.random()*300);
+        setInterval(updateTextProperties, Math.random()*700);
         updateBackground();
         updateTextProperties();
     </script>
