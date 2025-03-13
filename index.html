@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texte Défilant</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            transition: background 1s;
+        }
+        .text {
+            font-size: 200px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="text" id="scrollingText">J'aime les hommes</div>
+    <script>
+        function getRandomColor() {
+            return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+        }
+        
+        function updateBackground() {
+            document.body.style.background = `linear-gradient(45deg, ${getRandomColor()}, ${getRandomColor()})`;
+        }
+        
+        function updateTextProperties() {
+            let text = document.getElementById("scrollingText");
+            text.style.color = getRandomColor();
+            text.style.left = `${Math.random() * (window.innerWidth - text.clientWidth)}px`;
+            text.style.top = `${Math.random() * (window.innerHeight - text.clientHeight)}px`;
+        }
+        
+        setInterval(updateBackground, 500);
+        setInterval(updateTextProperties, 500);
+        updateBackground();
+        updateTextProperties();
+    </script>
+</body>
+</html>
