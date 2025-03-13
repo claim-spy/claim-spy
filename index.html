@@ -44,6 +44,7 @@
             text.style.color = getRandomColor();
             text.style.left = `${Math.random() * (window.innerWidth - text.clientWidth)}px`;
             text.style.top = `${Math.random() * (window.innerHeight - text.clientHeight)}px`;
+            text.style.fontSize = `${Math.random() * 100}px`;
         }
         
         setInterval(updateBackground, Math.random()*500);
