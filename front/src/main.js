@@ -6,6 +6,8 @@ import { createPinia } from "pinia";
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from './components/MainLayout.vue';
 import Placeholder from './pages/Placeholder.vue';
+import Login from './pages/Login.vue';
+import Signup from './pages/Signup.vue';
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -24,7 +26,12 @@ const routes = [{
   { 
     path: '/login',
     name: "Login", 
-    component: Placeholder
+    component: Login
+  },
+    { 
+    path: '/signup',
+    name: "Signup", 
+    component: Signup
   },
 ]
 

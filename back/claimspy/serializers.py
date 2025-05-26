@@ -1,4 +1,4 @@
-from back.claimspy.models import User
+from claimspy.models import User
 from rest_framework import serializers
 
 
