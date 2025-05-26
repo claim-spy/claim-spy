@@ -1,39 +1,19 @@
 <template>
-  <router-link to="/">Home</router-link>
-  <router-link :to="{name: 'test'}">Test</router-link>
-  <router-link :to="{name: 'testVal', params: { value: 12}}">Value</router-link>
-<router-view></router-view>
+  <Toaster/> 
+  <RouterView />
 </template>
 
 <script setup>
-
+import { Toaster } from 'vue-sonner';
+import './index.css';
 </script>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+<style>
+#app {
+  margin: 0;
+  padding: 0;
+  display: block; /* Or use any other display property based on your needs */
+  width: 100%;
+  height: 100vh; 
+  max-width: none;
 }
 </style>

@@ -2,19 +2,37 @@ import './assets/main.css'
 
 import { createApp } from 'vue'
 import App from './App.vue'
-import PrimeVue from 'primevue/config';
-import Aura from '@primeuix/themes/aura'
-import router from './route'
 import { createPinia } from "pinia";
+import { createRouter, createWebHistory } from 'vue-router';
+import MainLayout from './components/MainLayout.vue';
+import Placeholder from './pages/Placeholder.vue';
 
 const app = createApp(App)
 const pinia = createPinia()
 
-app.use(PrimeVue, {
-    theme: {
-        preset: Aura
-    }
-});
+const routes = [{ 
+    path: '/', 
+    component: MainLayout,
+    children: [
+        {
+            path: 'placeholder',
+            name: 'Placeholder',
+            component: Placeholder,
+            meta: {title: "Placeholder"}
+        },
+    ]},
+  { 
+    path: '/login',
+    name: "Login", 
+    component: Placeholder
+  },
+]
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+})
+// router.beforeEach(isAuthenticated)
 
 app.use(pinia)
 app.use(router)
