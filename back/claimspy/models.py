@@ -1,5 +1,7 @@
 import uuid
 from django.db import models
+from django.core.validators import EmailValidator
+from django.contrib.auth.models import AbstractUser
 
 
 class Tier(models.Model):
@@ -10,17 +12,28 @@ class Tier(models.Model):
         return f"Tier {self.id} - Max: {self.max_request}"
 
 
-class User(models.Model):
+class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    nom = models.CharField(max_length=100)
-    prenom = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    request_execute = models.IntegerField(default=0)
+    request_executed = models.IntegerField(default=0)
     tier = models.ForeignKey(Tier, on_delete=models.SET_NULL, null=True, related_name="users")
 
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='claimspy_user_groups',
+        blank=True,
+        help_text='The groups this user belongs to.',
+        verbose_name='groups',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='claimspy_user_permissions', 
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
+    )
+
     def __str__(self):
-        return f"{self.prenom} {self.nom}"
+        return f"{self.username}"
 
 
 class History(models.Model):
