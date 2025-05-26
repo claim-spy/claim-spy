@@ -15,6 +15,7 @@ dist/
 build/
 *.tgz
 venv
+back/.venv/
 
 # === PYTHON / DJANGO ===
 db.sqlite3

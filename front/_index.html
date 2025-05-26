@@ -1,13 +1,83 @@
 <!DOCTYPE html>
-<html lang="">
-  <head>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+    <meta name="description" content="J'aime." />
+    <meta name="robots" content="index, follow, max-snippet: -1, max-image-preview:large, max-video-preview: -1" />    
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Claim Spy" />
+    <meta property="og:description" content="J'aime." />
+    <meta property="og:url" content="https://claim-spy.com" />
+    <meta property="og:site_name" content="Claim Spy" />
+    <meta name="og:latitude" content="48.89509101358089" />
+    <meta name="og:longitude" content="2.2862604559591575" />
+    <meta name="og:street-address" content="1 Pl. de la République, 92300 Levallois-Perret" />
+    <meta name="og:locality" content="Levallois-Perret" />
+    <meta name="og:region" content="Île-de-France" />
+    <meta name="og:postal-code" content="92300" />
+    <meta name="og:country-name" content="France" />
+    <title>Claim Spy ( 我喜歡男人 )</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            transition: background 1s ease-in-out;
+        }
+        .text {
+            font-size: 80px;
+            font-weight: bold;
+            color: white;
+            position: absolute;
+            white-space: nowrap;
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="text" id="scrollingText">J'aime les hommes</div>
+    <script>
+        const words = [
+            "brunettes", "blondes", "roux", "milfs", "cougars", "twinks", "bears", "dominants", "soumis", "fétiches",
+            "voyeurs", "exhibitionnistes", "cosplay", "latex", "bikinis", "massages", "huiles", "uniformes", "roleplay", "sensuels",
+            "tentations", "caresses", "passionnés", "séducteurs", "kinky", "charmeurs", "intenses", "romantiques", "expérimentés", "aventuriers",
+            "nudistes", "lovers", "camgirls", "camguys", "petits", "grands", "bruyants", "silencieux", "provocants", "timides",
+            "chaleureux", "mystérieux", "frivoles", "libertins", "audacieux", "délicats", "sensibles", "énergiques", "tendres",
+            "sensations", "fantasmes", "érotisme", "mains", "baisers", "douceurs", "frissons", "envies", "désirs",
+            "joueurs", "complices", "exclusifs", "intimes", "secrets", "tordus", "libérés", "naturels", "sauvages",
+            "séduisants", "dominateurs", "compétents", "experts", "insatiables", "affamés", "voluptueux",
+            "obsédants", "tentateurs", "magiques", "virils", "féminins", "électriques", "captivants",
+            "joyeux", "malicieux", "rêveurs", "fébriles", "fragiles", "doux", "exotiques", "mystiques", "fantastiques",
+            "chaleureux", "luxueux", "élégants", "divins", "alléchants", "pétillants", "lumineux", "éblouissants", "féeriques"
+        ];
+        
+        function getRandomColor() {
+            return `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+        }
+        
+        function updateBackground() {
+            document.body.style.background = `linear-gradient(45deg, ${getRandomColor()}, ${getRandomColor()})`;
+        }
+        
+        function updateTextProperties() {
+            let text = document.getElementById("scrollingText");
+            let randomWord = words[Math.floor(Math.random() * words.length)];
+            text.innerText = `J'aime les ${randomWord}`;
+            text.style.color = getRandomColor();
+            text.style.left = `${Math.random() * (window.innerWidth - text.clientWidth)}px`;
+            text.style.top = `${Math.random() * (window.innerHeight - text.clientHeight)}px`;
+        }
+        
+        setInterval(updateBackground, 500);
+        setInterval(updateTextProperties, 500);
+        updateBackground();
+        updateTextProperties();
+    </script>
+</body>
 </html>

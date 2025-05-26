@@ -4,5 +4,5 @@ import Input from '@/components/ui/input/Input.vue'
 </script>
 <template>
     <Button>Test</Button>
-    <Input placeholder="test..."></Input>
+    <Input placeholder="test..."></Input> 
 </template>
