@@ -14,6 +14,9 @@ This is the repo of the Claim Spy backend
 ## Install dependencies
 `uv sync`
 
+## Migrate and create data
+`python manage.py migrate`
+`python manage.py createtiers`
+
 ## Start the server
-`python manage.py runserver` (si le virtual env est activé)
-`uv run python manage.py runserver` (si le virtual env n'est pas activé)
+`python manage.py runserver` 
