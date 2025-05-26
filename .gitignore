@@ -14,6 +14,7 @@ node_modules/
 dist/
 build/
 *.tgz
+venv
 
 # === PYTHON / DJANGO ===
 db.sqlite3
