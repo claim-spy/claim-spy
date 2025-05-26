@@ -1,0 +1,32 @@
+# === GLOBAL ===
+__pycache__/
+*.py[cod]
+*.so
+*.log
+*.sqlite3
+.env
+.DS_Store
+*.bak
+*.swp
+.idea/
+.vscode/
+node_modules/
+dist/
+build/
+*.tgz
+
+# === PYTHON / DJANGO ===
+db.sqlite3
+
+# Node modules
+/node_modules/
+
+# Local development files
+.env.*
+!.env.example
+
+# Cache
+.cache/
+.npm/
+.eslintcache
+coverage/
