@@ -18,37 +18,37 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-
 import { useRouter } from "vue-router"
 import SidebarMenuAction from "@/components/ui/sidebar/SidebarMenuAction.vue"
+import { toast } from "vue-sonner";
+import { makeApiRequest, removeAuthStorage} from "@/utils"
+import { useUser } from '@/composables/useUser'
+
+const { user } = useUser()
+
 const router = useRouter()
 
-
-// import { toast } from "vue-sonner";
-// import { makeApiRequest, removeAuthStorage} from "@/utils"
-// import { useUser } from '@/composables/useUser'
-// const { user } = useUser()
-
-// async function logout(){
-//     const refresh_token = localStorage.getItem("refresh_token")
+async function logout(){
+    const refresh_token = localStorage.getItem("refresh_token")
     
-//     if(refresh_token){
-//       try {
-//           await makeApiRequest({endpoint:'users/logout/', body:{"refresh": refresh_token}, method:'POST', useAccessToken:false})
-//           toast.success('Logged out', {description: "You have been logged out successfully."});
-//       }
-//       catch(error){
-//           toast.error('Logout failed', {description:"There was an error while logging out. Redirecting to the login page..."});
-//       }
-//     }
-//     removeAuthStorage()
-//     router.push({name:'Login'})
-// }
+    if(refresh_token){
+      try {
+          await makeApiRequest({endpoint:'users/logout/', body:{"refresh": refresh_token}, method:'POST', useAccessToken:false})
+          toast.success('Logged out', {description: "You have been logged out successfully."});
+      }
+      catch(error){
+          console.error("Logout error:", error);
+          toast.error('Logout failed', {description:"There was an error while logging out. Redirecting to the login page..."});
+      }
+    }
+    removeAuthStorage()
+    router.push({name:'Login'})
+}
 
 let items = [
   {
-    title: "Placeholder",
-    name: "Placeholder",
+    title: "Home",
+    name: "Home",
     icon: Music,
   }
 ]
@@ -85,7 +85,7 @@ let items = [
                 <SidebarMenuButton variant="outline"  class="h-10 border-1 shadow" asChild>
                   <div class=" w-[100%] p-0">
                     <component class="min-w-5 min-h-5 mr-2" :is="User2" />
-                    <span class="text-lg">PLACEHOLDER USERNAME</span>
+                    <span class="text-lg">{{ user.username }}</span>
                   </div>
                 </SidebarMenuButton>
             </SidebarMenuAction>

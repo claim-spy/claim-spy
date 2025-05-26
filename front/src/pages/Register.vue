@@ -5,7 +5,7 @@
         <h2 class="text-2xl font-bold text-center">Create a ClaimSpy account</h2>
       </CardHeader>
       <CardContent>
-          <form class="grid gap-4" @submit.prevent="handleSignup">
+          <form class="grid gap-4" @submit.prevent="handleRegister">
             <div class="grid gap-1">
               <Label for="email">Username</Label>
               <Input
@@ -37,10 +37,14 @@
               />
             </div>
             <Button type="submit" class="w-full" :disabled="loading">
-              {{ loading ? 'Signing in...' : 'Login' }}
+              {{ loading ? 'Registering...' : 'Register' }}
             </Button>
             <p v-if="error" class="text-red-500 text-sm text-center">
               {{ error }}
+            </p>
+            <p class="text-sm text-center">
+              Already have an account ?
+              <RouterLink :to="{name:'Login'}" class="text-blue-500 hover:underline">Login</RouterLink>
             </p>
           </form>
       </CardContent>
@@ -65,22 +69,27 @@
   const error = ref(null)
   
   const router = useRouter()
-  const {setUser} = useUser()
-  const handleSignup = async () => {
+  const {setUser} = useUser(true)
+  const handleRegister = async () => {
     error.value = null
     loading.value = true
     try {
-      const response = await makeApiRequest({
+      await makeApiRequest({
         endpoint: 'users/',
         method: 'POST',
         body: { username: username.value, email: email.value, password: password.value },
         useAccessToken: false,
       })
-
+      const response = await makeApiRequest({
+        endpoint: 'users/authenticate/',
+        method: 'POST',
+        body: { email: email.value, password: password.value },
+        useAccessToken: false,
+      })
       localStorage.setItem('access_token', response.access);
       localStorage.setItem('refresh_token', response.refresh);
       setUser(response.user)
-      router.push({name:"Charts"})
+      router.push({name:"Home"})
     } catch (err) {
       error.value = err.message
     } finally {

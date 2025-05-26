@@ -4,6 +4,8 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
+from claimspy.models import Tier
 
 from claimspy.serializers import UserSerializer
 
@@ -14,6 +16,15 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = (IsAuthenticated,)
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return [AllowAny()]
+        return super().get_permissions()
+    
+    def perform_create(self, serializer):
+        free_tier = Tier.objects.get(name='Free')
+        serializer.save(tier=free_tier)
 
     @action(detail=False, methods=['post'], permission_classes=())
     def logout(self, request):

@@ -1,9 +1,10 @@
 <template>
-  <Toaster/> 
+  <Toaster />
   <RouterView />
 </template>
 
 <script setup>
+import 'vue-sonner/style.css'
 import { Toaster } from 'vue-sonner';
 import './index.css';
 </script>

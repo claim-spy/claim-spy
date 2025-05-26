@@ -7,7 +7,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from './components/MainLayout.vue';
 import Placeholder from './pages/Placeholder.vue';
 import Login from './pages/Login.vue';
-import Signup from './pages/Signup.vue';
+import Register from './pages/Register.vue';
+import { refreshAccessToken, refreshUser, removeAuthStorage } from './utils';
 
 const app = createApp(App)
 const pinia = createPinia()
@@ -17,30 +18,48 @@ const routes = [{
     component: MainLayout,
     children: [
         {
-            path: 'placeholder',
-            name: 'Placeholder',
+            path: 'home',
+            name: 'Home',
             component: Placeholder,
-            meta: {title: "Placeholder"}
+            meta: {title: "Placeholder home"}
         },
     ]},
-  { 
+  {
     path: '/login',
     name: "Login", 
     component: Login
   },
     { 
-    path: '/signup',
-    name: "Signup", 
-    component: Signup
+    path: '/register',
+    name: "Register", 
+    component: Register
   },
 ]
+
+export async function isAuthenticatedGuard(to) {
+    const publicRoutes = ['Login', 'Register']
+
+    if (publicRoutes.includes(to.name)) return true
+
+    if(!localStorage.getItem('refresh_token')){
+        removeAuthStorage()
+        return {name: 'Login'}
+    }
+    
+    if(!localStorage.getItem('access_token')){
+        await refreshAccessToken(router)
+    }
+    
+    if(!sessionStorage.getItem('user')){
+        await refreshUser(router)
+    }
+}
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
 })
-// router.beforeEach(isAuthenticated)
-
+router.beforeEach(isAuthenticatedGuard)
 app.use(pinia)
 app.use(router)
 app.mount('#app')

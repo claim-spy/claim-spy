@@ -6,6 +6,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Tier(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=30, unique=True)
     max_request = models.IntegerField()
 
     def __str__(self):
@@ -15,7 +16,7 @@ class Tier(models.Model):
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     request_executed = models.IntegerField(default=0)
-    tier = models.ForeignKey(Tier, on_delete=models.SET_NULL, null=True, related_name="users")
+    tier = models.ForeignKey(Tier, on_delete=models.PROTECT, related_name="users")
 
     groups = models.ManyToManyField(
         'auth.Group',

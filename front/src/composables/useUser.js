@@ -10,9 +10,10 @@ function setUser(newUser) {
   user.value = newUser
 }
 
-export function useUser() {
+export function useUser(allow_null = false) {
     const _router = useRouter()
-    if(user.value === null){
+
+    if(user.value === null && !allow_null){
         refreshUser(_router)
     }
 
